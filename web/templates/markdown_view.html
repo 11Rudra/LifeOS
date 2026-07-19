@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="doc-card">
+    <h1>{{ title }}</h1>
+    <div class="markdown-body">
+        {{ content|safe }}
+    </div>
+</div>
+{% endblock %}

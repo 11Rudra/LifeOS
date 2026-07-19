@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="hero-card">
+    <div class="floating-orb orb-blue"></div>
+    <div class="floating-orb orb-teal"></div>
+    <h1>{{ model.title }}</h1>
+    <p class="lead">Assign time for each task across the week, including weekday focus and weekend recovery.</p>
+    <form method="post" action="/planner" class="mt-4">
+        <div class="table-responsive">
+            <table class="table table-bordered bg-white">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        {% for task in model.tasks %}
+                        <th>{{ task.name }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for day in model.days %}
+                    <tr>
+                        <td><strong>{{ day }}</strong></td>
+                        {% for task in model.tasks %}
+                        <td>
+                            <input type="text" class="form-control" name="plan-{{ day }}-{{ task.name }}" value="{{ model.planner_data[day][task.name] }}" placeholder="hrs">
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Weekly Plan</button>
+    </form>
+</div>
+{% endblock %}
